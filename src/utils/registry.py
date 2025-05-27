@@ -30,3 +30,10 @@ class Registry:
 
     def __iter__(self):
         return iter(self._registry.items())
+
+
+MODEL_REGISTRY = Registry("model")
+LOSS_REGISTRY = Registry("loss")
+TRAINER_REGISTRY = Registry("trainer")
+DATASET_REGISTRY = Registry("dataset")
+METRIC_REGISTRY = Registry("metric")
