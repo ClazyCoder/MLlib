@@ -1,4 +1,6 @@
-"""
-Models package for MLlib.
-This package contains various model implementations registered through MODEL_REGISTRY.
-"""
+from utils.registry import MODEL_REGISTRY
+
+__all__ = ['build_model']
+
+def build_model(config):
+    return MODEL_REGISTRY.get(config['model'])(config)
