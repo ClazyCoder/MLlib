@@ -2,8 +2,10 @@ from torch.utils.data import Dataset
 from PIL import Image
 import torchvision
 import torch
+from src.utils.registry import DATASET_REGISTRY
 
 
+@DATASET_REGISTRY.register()
 class ClassificationDataset(Dataset):
     def __init__(self, image_paths, labels, transform=None):
         self.image_paths = image_paths

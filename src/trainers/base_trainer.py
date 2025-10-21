@@ -1,8 +1,8 @@
 from abc import *
 
 
-class BaseTrainer(ABCMeta):
-    def __init__(self):
+class BaseTrainer(ABC):
+    def __init__(self, config):
         pass
 
     @abstractmethod
