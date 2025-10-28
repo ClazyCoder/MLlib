@@ -10,3 +10,6 @@ class ClassificationTrainer(BaseTrainer):
 
     def validation(self):
         pass
+
+    def test(self):
+        pass
