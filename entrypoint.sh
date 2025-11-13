@@ -8,10 +8,10 @@ echo "Using mode: $MODE"
 
 if [ $MODE == "train" ]; then
     echo "[INFO] Training mode."
-    python main.py --mode train --config $CONFIG_NAME
+    python src/main.py --mode train --config $CONFIG_NAME
 elif [ $MODE == "test" ]; then
     echo "[INFO] Testing mode."
-    python main.py --mode test --config $CONFIG_NAME
+    python src/main.py --mode test --config $CONFIG_NAME
 fi
 
 echo "[INFO] Done."
