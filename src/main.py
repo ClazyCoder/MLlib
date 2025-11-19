@@ -4,7 +4,6 @@ from src.trainers import build_trainer
 import os
 import logging
 
-CONFIG_PATH = "/app/configs/"
 LOG_FILE_NAME = "mllib_logs.log"
 LOG_DIR = "/app/logs/"
 if not os.path.exists(LOG_DIR):
@@ -19,9 +18,9 @@ logger = logging.getLogger(__name__)
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--mode", type=str, default="train")
-    parser.add_argument("--config", type=str, default="default.yaml")
+    parser.add_argument("--config", type=str, default="configs/default.yaml")
     args = parser.parse_args()
-    config = Config(os.path.join(CONFIG_PATH, args.config))
+    config = Config(args.config)
     trainer = build_trainer(config)
     if args.mode == "train":
         logger.info(f"Training started.")
