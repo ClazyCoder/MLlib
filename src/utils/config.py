@@ -40,3 +40,7 @@ class Config:
     def load(self, config_path: str):
         with open(config_path, 'r') as f:
             self.config = yaml.load(f, Loader=yaml.FullLoader)
+
+    def get(self, key, default=None):
+        # TODO : check validity of value(type, range, etc.)
+        return self.config.get(key, default)
