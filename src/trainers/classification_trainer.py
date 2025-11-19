@@ -16,8 +16,8 @@ class ClassificationTrainer(BaseTrainer):
     def __init__(self, config):
         super(ClassificationTrainer, self).__init__(config)
 
-        self.model = build_model(config.get('model', None))
-        self.criterion = build_loss(config.get('criterion', None))
+        self.model = build_model(config)
+        self.criterion = build_loss(config)
         self.optimizer = torch.optim.Adam(
             self.model.parameters(), lr=config.get('lr', 0.001))
         self.train_dataloader = DataLoader(build_dataset(
@@ -26,7 +26,7 @@ class ClassificationTrainer(BaseTrainer):
             config), batch_size=config.get('batch_size', 16), shuffle=False)
         self.device = get_device()
         self.best_val_accuracy = 0
-        self.metric = build_metric(config.get('metric', None))
+        self.metric = build_metric(config)
 
     def train(self):
         logger = getLogger(__name__)
