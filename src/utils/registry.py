@@ -4,14 +4,17 @@ class Registry:
         self._registry = {}
 
     def register(self, obj=None):
+        # If obj is None, it is a decorator
         if obj is None:
             def decorator(func_or_cls):
-                name = func_or_cls.__name__.lower()
+                # name is the name of the function or class
+                name = func_or_cls.__name__
                 self._register(name, func_or_cls)
                 return func_or_cls
             return decorator
 
-        name = obj.__name__.lower()
+        # name is the name of the object
+        name = obj.__name__
         self._register(name, obj)
 
     def _register(self, name, obj):
