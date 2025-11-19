@@ -10,9 +10,5 @@ class BaseTrainer(ABC):
         pass
 
     @abstractmethod
-    def validation(self):
-        pass
-
-    @abstractmethod
     def test(self):
         pass
