@@ -19,7 +19,7 @@ uv sync
 ## 사용법
 
 ```bash
-sh entrypoint.sh MODE CONFIG_PATH
+bash entrypoint.sh MODE CONFIG_PATH
 ```
 
 ## Docker
