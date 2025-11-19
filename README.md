@@ -19,7 +19,7 @@ uv sync
 ## 사용법
 
 ```bash
-python src/main.py --mode train --config default.yaml
+sh entrypoint.sh MODE CONFIG_PATH
 ```
 
 ## Docker
