@@ -2,15 +2,18 @@ from torch.utils.data import Dataset
 from PIL import Image
 import torchvision
 import torch
+import json
 from src.utils.registry import DATASET_REGISTRY
 
 
 @DATASET_REGISTRY.register()
 class ClassificationDataset(Dataset):
-    def __init__(self, image_paths, labels, transform=None):
-        self.image_paths = image_paths
-        self.labels = labels
-        self.transform = transform
+    def __init__(self, config):
+        with open(config.get('data_path', None), 'r') as f:
+            data = json.load(f)
+        self.image_paths = data.get('image_paths', None)
+        self.labels = data.get('labels', None)
+        self.transform = torchvision.transforms.ToTensor()  # TODO : add transform builder
 
     def __len__(self):
         return len(self.image_paths)
