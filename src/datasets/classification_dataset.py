@@ -1,7 +1,6 @@
 from torch.utils.data import Dataset
 from PIL import Image
 import torchvision
-import torch
 import json
 from src.utils.registry import DATASET_REGISTRY
 
