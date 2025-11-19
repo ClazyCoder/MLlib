@@ -1,4 +1,5 @@
 from src.utils.registry import DATASET_REGISTRY
+from src.datasets.classification_dataset import *
 
 
 __all__ = ['build_dataset']
