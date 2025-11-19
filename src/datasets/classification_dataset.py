@@ -7,8 +7,8 @@ from src.utils.registry import DATASET_REGISTRY
 
 @DATASET_REGISTRY.register()
 class ClassificationDataset(Dataset):
-    def __init__(self, config):
-        with open(config.get('data_path', None), 'r') as f:
+    def __init__(self, config, type='train'):
+        with open(config.get(f'{type}_dataset_path', None), 'r') as f:
             data = json.load(f)
         self.image_paths = data.get('image_paths', None)
         self.labels = data.get('labels', None)

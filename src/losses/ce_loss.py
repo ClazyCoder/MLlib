@@ -8,8 +8,8 @@ from src.utils.registry import LOSS_REGISTRY
 class CELoss(nn.Module):
     def __init__(self, config):
         super(CELoss, self).__init__()
-        self.weight = config.get('weight', None)
-        self.ignore_index = config.get('ignore_index', -100)
+        self.weight = config['loss_config'].get('weight', None)
+        self.ignore_index = config['loss_config'].get('ignore_index', -100)
 
     def forward(self, input, target):
         return F.cross_entropy(input, target, weight=self.weight, ignore_index=self.ignore_index)
