@@ -1,5 +1,5 @@
 import argparse
-from src.utils.config import Config
+import yaml
 from src.trainers import build_trainer
 import os
 import logging
@@ -20,7 +20,8 @@ def main():
     parser.add_argument("--mode", type=str, default="train")
     parser.add_argument("--config", type=str, default="configs/default.yaml")
     args = parser.parse_args()
-    config = Config(args.config)
+    with open(args.config, 'r') as f:
+        config = yaml.load(f, Loader=yaml.FullLoader)
     trainer = build_trainer(config)
     if args.mode == "train":
         logger.info(f"Training started.")
