@@ -3,6 +3,7 @@ from utils.device import move_to_device, get_device
 from src.models import build_model
 from src.datasets import build_dataset
 from src.losses import build_loss
+from src.metrics import build_metric
 import torch
 from torch.utils.data import DataLoader
 import os
@@ -25,6 +26,7 @@ class ClassificationTrainer(BaseTrainer):
             config), batch_size=config.get('batch_size', 16), shuffle=False)
         self.device = get_device()
         self.best_val_accuracy = 0
+        self.metric = build_metric(config.get('metric', None))
 
     def train(self):
         logger = getLogger(__name__)
