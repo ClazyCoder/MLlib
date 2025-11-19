@@ -3,10 +3,12 @@ import os
 import glob
 import argparse
 
+IMAGE_EXTENSIONS = ['jpg', 'png', 'jpeg', 'webp', 'gif', 'bmp', 'tiff']
+
 
 def build_image_dataset(data_path, output_path):
     image_paths = [f for f in glob.glob(os.path.join(
-        data_path, '**/*.{jpg,png,jpeg,webp,gif,bmp,tiff}'), recursive=True) if os.path.isfile(f)]
+        data_path, '**/*.*'), recursive=True) if os.path.isfile(f) and os.path.splitext(f)[1].lower() in IMAGE_EXTENSIONS]
     if len(image_paths) == 0:
         raise ValueError(f"No images found in {data_path}")
     # TODO : find better way to get labels(NOW: using upper folder name as label)
