@@ -17,5 +17,4 @@ build-backend = "hatchling.build"
 packages = ["src"]
 
 [tool.uv]
-dev-dependencies = []
-
+dependency-groups.dev = []
