@@ -3,7 +3,7 @@ import os
 import glob
 import argparse
 
-IMAGE_EXTENSIONS = ['jpg', 'png', 'jpeg', 'webp', 'gif', 'bmp', 'tiff']
+IMAGE_EXTENSIONS = ['.jpg', '.png', '.jpeg', '.webp', '.gif', '.bmp', '.tiff']
 
 
 def build_image_dataset(data_path, output_path):
