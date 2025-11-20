@@ -68,7 +68,7 @@ uv run src/build_dataset.py --mode [MODE] --data_path [PATH_TO_DATASET] --output
 
 #### data_path
 
-데이터가 존재하는 경로. 폴더 형태는 다음과 같아야 함.:
+데이터가 존재하는 경로. 폴더 구조는 다음과 같아야 합니다:
 ```
 root
 ├── classnum
