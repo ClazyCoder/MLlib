@@ -51,9 +51,9 @@ class ResNet18(BaseResNet):
     def __init__(self, config=None):
         if config is not None:
             num_classes = config.get('model_config').get(
-                'num_classes', num_classes)
+                'num_classes', 1000)
             pretrained = config.get('model_config').get(
-                'pretrained', pretrained)
+                'pretrained', True)
         super(ResNet18, self).__init__('resnet18', num_classes, pretrained)
 
 
@@ -62,9 +62,9 @@ class ResNet34(BaseResNet):
     def __init__(self, config=None):
         if config is not None:
             num_classes = config.get('model_config').get(
-                'num_classes', num_classes)
+                'num_classes', 1000)
             pretrained = config.get('model_config').get(
-                'pretrained', pretrained)
+                'pretrained', True)
         super(ResNet34, self).__init__('resnet34', num_classes, pretrained)
 
 
@@ -73,9 +73,9 @@ class ResNet50(BaseResNet):
     def __init__(self, config=None):
         if config is not None:
             num_classes = config.get('model_config').get(
-                'num_classes', num_classes)
+                'num_classes', 1000)
             pretrained = config.get('model_config').get(
-                'pretrained', pretrained)
+                'pretrained', True)
         super(ResNet50, self).__init__('resnet50', num_classes, pretrained)
 
 
@@ -84,9 +84,9 @@ class ResNet101(BaseResNet):
     def __init__(self, config=None):
         if config is not None:
             num_classes = config.get('model_config').get(
-                'num_classes', num_classes)
+                'num_classes', 1000)
             pretrained = config.get('model_config').get(
-                'pretrained', pretrained)
+                'pretrained', True)
         super(ResNet101, self).__init__('resnet101', num_classes, pretrained)
 
 
@@ -95,7 +95,7 @@ class ResNet152(BaseResNet):
     def __init__(self, config=None):
         if config is not None:
             num_classes = config.get('model_config').get(
-                'num_classes', num_classes)
+                'num_classes', 1000)
             pretrained = config.get('model_config').get(
-                'pretrained', pretrained)
+                'pretrained', True)
         super(ResNet152, self).__init__('resnet152', num_classes, pretrained)
