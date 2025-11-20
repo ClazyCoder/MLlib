@@ -105,9 +105,9 @@ class ClassificationTrainer(BaseTrainer):
     def test(self):
         logger = getLogger(__name__)
         logger.info(f"Testing started.")
-        move_to_device(self.model, self.device)
-        total_test_loss = 0
-        total_test_accuracy = 0
+        # Move model to device only if not already on device
+        if next(self.model.parameters()).device != self.device:
+            move_to_device(self.model, self.device)
         self.model.eval()
         with torch.no_grad():
             for images, labels in self.test_dataloader:
