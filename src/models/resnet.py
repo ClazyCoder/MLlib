@@ -5,10 +5,11 @@ from torchvision.models import (
     ResNet101_Weights, ResNet152_Weights
 )
 from src.utils.registry import MODEL_REGISTRY
+from src.models.config import ModelConfig
 
 
 class BaseResNet(nn.Module):
-    def __init__(self, model_name, num_classes=1000, pretrained=True):
+    def __init__(self, model_name: str, num_classes: int = 1000, pretrained: bool = True):
         """
         ResNet 모델의 기본 클래스
 
@@ -47,39 +48,34 @@ class BaseResNet(nn.Module):
 
 @MODEL_REGISTRY.register()
 class ResNet18(BaseResNet):
-    def __init__(self, config):
-        num_classes = config.get('model_config').get('num_classes', 1000)
-        pretrained = config.get('model_config').get('pretrained', True)
-        super(ResNet18, self).__init__('resnet18', num_classes, pretrained)
+    def __init__(self, config: ModelConfig):
+        super(ResNet18, self).__init__('resnet18',
+                                       config.num_classes, config.pretrained)
 
 
 @MODEL_REGISTRY.register()
 class ResNet34(BaseResNet):
-    def __init__(self, config):
-        num_classes = config.get('model_config').get('num_classes', 1000)
-        pretrained = config.get('model_config').get('pretrained', True)
-        super(ResNet34, self).__init__('resnet34', num_classes, pretrained)
+    def __init__(self, config: ModelConfig):
+        super(ResNet34, self).__init__('resnet34',
+                                       config.num_classes, config.pretrained)
 
 
 @MODEL_REGISTRY.register()
 class ResNet50(BaseResNet):
-    def __init__(self, config):
-        num_classes = config.get('model_config').get('num_classes', 1000)
-        pretrained = config.get('model_config').get('pretrained', True)
-        super(ResNet50, self).__init__('resnet50', num_classes, pretrained)
+    def __init__(self, config: ModelConfig):
+        super(ResNet50, self).__init__('resnet50',
+                                       config.num_classes, config.pretrained)
 
 
 @MODEL_REGISTRY.register()
 class ResNet101(BaseResNet):
-    def __init__(self, config):
-        num_classes = config.get('model_config').get('num_classes', 1000)
-        pretrained = config.get('model_config').get('pretrained', True)
-        super(ResNet101, self).__init__('resnet101', num_classes, pretrained)
+    def __init__(self, config: ModelConfig):
+        super(ResNet101, self).__init__('resnet101',
+                                        config.num_classes, config.pretrained)
 
 
 @MODEL_REGISTRY.register()
 class ResNet152(BaseResNet):
-    def __init__(self, config):
-        num_classes = config.get('model_config').get('num_classes', 1000)
-        pretrained = config.get('model_config').get('pretrained', True)
-        super(ResNet152, self).__init__('resnet152', num_classes, pretrained)
+    def __init__(self, config: ModelConfig):
+        super(ResNet152, self).__init__('resnet152',
+                                        config.num_classes, config.pretrained)
