@@ -8,6 +8,7 @@ dependencies = [
     "torchvision",
     "pyyaml",
     "pillow",
+    "pydantic>=2.10.6",
 ]
 
 [build-system]
