@@ -92,7 +92,8 @@ class ClassificationTrainer(BaseTrainer):
                 logger.info(
                     f"Val Accuracy: {total_val_accuracy / len(self.val_dataloader)}")
                 if len(self.val_dataloader.dataset) > 0:
-                    avg_val_accuracy = total_val_accuracy / len(self.val_dataloader)
+                    avg_val_accuracy = total_val_accuracy / \
+                        len(self.val_dataloader)
                     if avg_val_accuracy > self.best_val_accuracy:
                         self.best_val_accuracy = avg_val_accuracy
                         torch.save(self.model.state_dict(), os.path.join(
@@ -103,11 +104,11 @@ class ClassificationTrainer(BaseTrainer):
         logger.info(f"Training completed successfully.")
 
     def test(self):
+        total_test_loss = 0
+        total_test_accuracy = 0
         logger = getLogger(__name__)
         logger.info(f"Testing started.")
-        # Move model to device only if not already on device
-        if next(self.model.parameters()).device != self.device:
-            move_to_device(self.model, self.device)
+        move_to_device(self.model, self.device)
         self.model.eval()
         with torch.no_grad():
             for images, labels in self.test_dataloader:
