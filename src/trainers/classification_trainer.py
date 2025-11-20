@@ -47,7 +47,7 @@ class ClassificationTrainer(BaseTrainer):
         metric_config = MetricConfig(**config.metric_config)
         self.metric = build_metric(metric_config)
 
-        if os.path.exists(self.config.save_dir):
+        if not os.path.exists(self.config.save_dir):
             os.makedirs(self.config.save_dir)
 
     def train(self):
