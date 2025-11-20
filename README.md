@@ -83,4 +83,4 @@ root
 
 #### output_path
 
-결과 json파일의 저장 경로. EX: ./train.json
+결과 JSON 파일의 저장 경로. EX: ./train.json
