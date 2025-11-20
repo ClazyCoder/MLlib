@@ -14,7 +14,12 @@ class ClassificationDataset(Dataset):
             'val': config.val_dataset_path,
             'test': config.test_dataset_path
         }
-        with open(path_map[type], 'r') as f:
+        if type not in path_map:
+            raise ValueError(f"Unknown dataset type '{type}'. Must be one of {list(path_map.keys())}.")
+        dataset_path = path_map[type]
+        if dataset_path is None:
+            raise ValueError(f"Dataset path for '{type}' is not configured.")
+        with open(dataset_path, 'r') as f:
             data = json.load(f)
         self.image_paths = data['image_paths']
         self.labels = data['labels']
