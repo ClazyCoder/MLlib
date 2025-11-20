@@ -9,7 +9,12 @@ from src.datasets.config import DatasetConfig
 @DATASET_REGISTRY.register()
 class ClassificationDataset(Dataset):
     def __init__(self, config: DatasetConfig, type: str = 'train'):
-        with open(config.train_dataset_path if type == 'train' else config.val_dataset_path if type == 'val' else config.test_dataset_path, 'r') as f:
+        path_map = {
+            'train': config.train_dataset_path,
+            'val': config.val_dataset_path,
+            'test': config.test_dataset_path
+        }
+        with open(path_map[type], 'r') as f:
             data = json.load(f)
         self.image_paths = data['image_paths']
         self.labels = data['labels']
