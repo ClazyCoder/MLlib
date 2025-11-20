@@ -16,6 +16,7 @@ class Registry:
         # name is the name of the object
         name = obj.__name__
         self._register(name, obj)
+        return obj
 
     def _register(self, name, obj):
         assert (
