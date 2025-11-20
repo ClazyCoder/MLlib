@@ -20,17 +20,17 @@ from src.metrics.config import MetricConfig
 @TRAINER_REGISTRY.register()
 class ClassificationTrainer(BaseTrainer):
     def __init__(self, config: RootConfig):
-        trainer_config = TrainerConfig(**config.trainer_config)
+        trainer_config = TrainerConfig(**config.trainer_cfg)
         super(ClassificationTrainer, self).__init__(trainer_config)
         self.config = trainer_config
-        model_config = ModelConfig(**config.model_config)
+        model_config = ModelConfig(**config.model_cfg)
         self.model = build_model(model_config)
-        loss_config = LossConfig(**config.loss_config)
+        loss_config = LossConfig(**config.loss_cfg)
         self.loss = build_loss(loss_config)
         self.optimizer = torch.optim.Adam(
             self.model.parameters(), lr=self.config.lr)
 
-        dataset_config = DatasetConfig(**config.dataset_config)
+        dataset_config = DatasetConfig(**config.dataset_cfg)
         self.train_dataloader = DataLoader(build_dataset(
             dataset_config, 'train'), batch_size=self.config.batch_size, shuffle=True)
         self.val_dataloader = DataLoader(build_dataset(
@@ -42,9 +42,10 @@ class ClassificationTrainer(BaseTrainer):
             self.test_dataloader = self.val_dataloader
         self.device = get_device()
         self.best_val_accuracy = 0
-        if 'num_classes' not in config.metric_config:
-            config.metric_config['num_classes'] = model_config.num_classes
-        metric_config = MetricConfig(**config.metric_config)
+        metric_config_dict = dict(config.metric_cfg)
+        if 'num_classes' not in metric_config_dict:
+            metric_config_dict['num_classes'] = model_config.num_classes
+        metric_config = MetricConfig(**metric_config_dict)
         self.metric = build_metric(metric_config)
 
         if not os.path.exists(self.config.save_dir):
