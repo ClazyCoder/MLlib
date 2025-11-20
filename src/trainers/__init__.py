@@ -1,4 +1,4 @@
-from utils.registry import TRAINER_REGISTRY
+from src.utils.registry import TRAINER_REGISTRY
 from src.trainers.classification_trainer import ClassificationTrainer
 
 __all__ = ['build_trainer']
