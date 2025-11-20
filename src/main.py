@@ -3,6 +3,7 @@ import yaml
 from src.trainers import build_trainer
 import os
 import logging
+from src.utils.config import RootConfig
 
 LOG_FILE_NAME = "mllib_logs.log"
 LOG_DIR = os.environ.get("LOG_DIR", "./logs")
@@ -22,6 +23,7 @@ def main():
     args = parser.parse_args()
     with open(args.config, 'r') as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
+    config = RootConfig(**config)
     trainer = build_trainer(config)
     if args.mode == "train":
         logger.info(f"Training started.")

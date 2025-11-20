@@ -1,10 +1,11 @@
-from utils.registry import METRIC_REGISTRY
+from src.utils.registry import METRIC_REGISTRY
+from src.metrics.config import MetricConfig
 
 
 @METRIC_REGISTRY.register()
 class Accuracy:
-    def __init__(self, config):
-        self.num_classes = config.get('model_config').get('num_classes', 2)
+    def __init__(self, config: MetricConfig):
+        self.num_classes = config.num_classes
         self.total_samples = 0
         self.correct_samples = 0
 
