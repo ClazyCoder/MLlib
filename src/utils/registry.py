@@ -4,14 +4,17 @@ class Registry:
         self._registry = {}
 
     def register(self, obj=None):
+        # If obj is None, it is a decorator
         if obj is None:
             def decorator(func_or_cls):
-                name = func_or_cls.__name__.lower()
+                # name is the name of the function or class
+                name = func_or_cls.__name__
                 self._register(name, func_or_cls)
                 return func_or_cls
             return decorator
 
-        name = obj.__name__.lower()
+        # name is the name of the object
+        name = obj.__name__
         self._register(name, obj)
 
     def _register(self, name, obj):
@@ -22,7 +25,10 @@ class Registry:
     def get(self, name):
         obj = self._registry.get(name)
         if obj is None:
-            raise KeyError(f"{name} not found in {self._name}")
+            error_msg = f"{name} not found in {self._name} registry\n"
+            error_msg += f"{self._name} registry contains the following items:\n"
+            error_msg += f"{self}"
+            raise ValueError(error_msg)
         return self._registry[name]
 
     def __contains__(self, name):
@@ -30,6 +36,12 @@ class Registry:
 
     def __iter__(self):
         return iter(self._registry.items())
+
+    def __repr__(self):
+        repr_str = ""
+        for name, _ in self._registry.items():
+            repr_str += f"  - {name}\n"
+        return repr_str
 
 
 MODEL_REGISTRY = Registry("model")
