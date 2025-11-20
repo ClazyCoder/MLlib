@@ -31,14 +31,15 @@ class ClassificationTrainer(BaseTrainer):
     def train(self):
         logger = getLogger(__name__)
         logger.info(f"Training started.")
-        total_train_loss = 0
-        total_train_accuracy = 0
-        total_val_loss = 0
-        total_val_accuracy = 0
         move_to_device(self.model, self.device)
         for epoch in range(self.config.get('epochs', 10)):
+            total_train_loss = 0
+            total_train_accuracy = 0
+            total_val_loss = 0
+            total_val_accuracy = 0
             self.model.train()
             logger.info(f"Epoch {epoch} started.")
+
             for images, labels in self.train_dataloader:
                 images = move_to_device(images, self.device)
                 labels = move_to_device(labels, self.device)
@@ -54,6 +55,7 @@ class ClassificationTrainer(BaseTrainer):
             logger.info(
                 f"Train Accuracy: {total_train_accuracy / len(self.train_dataloader)}")
             self.model.eval()
+
             with torch.no_grad():
                 for images, labels in self.val_dataloader:
                     images = move_to_device(images, self.device)
