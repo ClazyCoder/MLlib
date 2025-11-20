@@ -8,17 +8,17 @@ from src.datasets.config import DatasetConfig
 
 @DATASET_REGISTRY.register()
 class ClassificationDataset(Dataset):
-    def __init__(self, config: DatasetConfig, type: str = 'train'):
+    def __init__(self, config: DatasetConfig, split: str = 'train'):
         path_map = {
             'train': config.train_dataset_path,
             'val': config.val_dataset_path,
             'test': config.test_dataset_path
         }
-        if type not in path_map:
-            raise ValueError(f"Unknown dataset type '{type}'. Must be one of {list(path_map.keys())}.")
-        dataset_path = path_map[type]
+        if split not in path_map:
+            raise ValueError(f"Unknown dataset split '{split}'. Must be one of {list(path_map.keys())}.")
+        dataset_path = path_map[split]
         if dataset_path is None:
-            raise ValueError(f"Dataset path for '{type}' is not configured.")
+            raise ValueError(f"Dataset path for '{split}' is not configured.")
         with open(dataset_path, 'r') as f:
             data = json.load(f)
         self.image_paths = data['image_paths']
