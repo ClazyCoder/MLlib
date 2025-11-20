@@ -35,6 +35,7 @@ class ClassificationTrainer(BaseTrainer):
         total_train_accuracy = 0
         total_val_loss = 0
         total_val_accuracy = 0
+        move_to_device(self.model, self.device)
         for epoch in range(self.config.get('epochs', 10)):
             self.model.train()
             logger.info(f"Epoch {epoch} started.")
@@ -74,6 +75,9 @@ class ClassificationTrainer(BaseTrainer):
     def test(self):
         logger = getLogger(__name__)
         logger.info(f"Testing started.")
+        move_to_device(self.model, self.device)
+        total_test_loss = 0
+        total_test_accuracy = 0
         self.model.eval()
         for images, labels in self.test_dataloader:
             images = move_to_device(images, self.device)
@@ -84,3 +88,6 @@ class ClassificationTrainer(BaseTrainer):
             total_test_accuracy += self.metric.compute(outputs, labels)
         logger.info(
             f"Test Loss: {total_test_loss / len(self.test_dataloader)}")
+        logger.info(
+            f"Test Accuracy: {total_test_accuracy / len(self.test_dataloader)}")
+        logger.info(f"Testing completed successfully.")
