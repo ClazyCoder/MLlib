@@ -54,7 +54,7 @@ class ClassificationTrainer(BaseTrainer):
         logger = getLogger(__name__)
         logger.info(f"Training started.")
         move_to_device(self.model, self.device)
-        for epoch in range(self.config.trainer_config.epochs):
+        for epoch in range(self.config.epochs):
             total_train_loss = 0
             total_train_accuracy = 0
             total_val_loss = 0
