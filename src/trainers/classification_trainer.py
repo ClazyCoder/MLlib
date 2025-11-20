@@ -1,5 +1,5 @@
 from src.trainers.base_trainer import BaseTrainer
-from utils.device import move_to_device, get_device
+from src.utils.device import move_to_device, get_device
 from src.models import build_model
 from src.datasets import build_dataset
 from src.losses import build_loss
