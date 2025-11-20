@@ -25,7 +25,9 @@ class Registry:
     def get(self, name):
         obj = self._registry.get(name)
         if obj is None:
-            raise KeyError(f"{name} not found in {self._name}")
+            raise KeyError(f"{name} not found in {self._name} registry\n",
+                           f"{self._name} registry contains the following items:\n",
+                           f"{self}")
         return self._registry[name]
 
     def __contains__(self, name):
@@ -33,6 +35,12 @@ class Registry:
 
     def __iter__(self):
         return iter(self._registry.items())
+
+    def __repr__(self):
+        repr_str = f"{self._name} registry containing the following items:\n"
+        for name, obj in self._registry.items():
+            repr_str += f"  - {name}: {obj.__class__.__name__}\n"
+        return repr_str
 
 
 MODEL_REGISTRY = Registry("model")
