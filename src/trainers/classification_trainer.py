@@ -42,10 +42,13 @@ class ClassificationTrainer(BaseTrainer):
             for images, labels in self.train_dataloader:
                 images = move_to_device(images, self.device)
                 labels = move_to_device(labels, self.device)
+                self.optimizer.zero_grad()
                 outputs = self.model(images)
                 loss = self.criterion(outputs, labels)
                 total_train_loss += loss.item()
                 total_train_accuracy += self.metric.compute(outputs, labels)
+                loss.backward()
+                self.optimizer.step()
             logger.info(
                 f"Train Loss: {total_train_loss / len(self.train_dataloader)}")
             logger.info(
