@@ -6,5 +6,5 @@ __all__ = ['build_trainer']
 
 
 def build_trainer(config: RootConfig):
-    trainer_config = TrainerConfig(**config.trainer_config)
+    trainer_config = TrainerConfig(**config.trainer_cfg)
     return TRAINER_REGISTRY.get(trainer_config.name)(config)

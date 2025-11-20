@@ -5,7 +5,7 @@ from src.metrics.config import MetricConfig
 @METRIC_REGISTRY.register()
 class Accuracy:
     def __init__(self, config: MetricConfig):
-        self.num_classes = config.num_classes
+        self.num_classes = getattr(config, 'num_classes', 2)
         self.total_samples = 0
         self.correct_samples = 0
 
