@@ -34,23 +34,23 @@ docker run mllib train default.yaml
 ## Config 예시
 
 ```yaml
-model_config:
+model_cfg:
   name: ResNet18
   num_classes: 2
   pretrained: true
-loss_config:
+loss_cfg:
   name: CELoss
   weight: null
   ignore_index: -100
-trainer_config:
+trainer_cfg:
   name: ClassificationTrainer
   lr: 0.001
   batch_size: 16
   epochs: 10
   save_dir: ./results
-metric_config:
+metric_cfg:
   name: Accuracy
-dataset_config:
+dataset_cfg:
   name: ClassificationDataset
   train_dataset_path: ./test/data/train.json
   val_dataset_path: ./test/data/val.json
