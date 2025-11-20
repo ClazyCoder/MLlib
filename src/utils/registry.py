@@ -25,9 +25,10 @@ class Registry:
     def get(self, name):
         obj = self._registry.get(name)
         if obj is None:
-            raise KeyError(f"{name} not found in {self._name} registry\n",
-                           f"{self._name} registry contains the following items:\n",
-                           f"{self}")
+            error_msg = f"{name} not found in {self._name} registry\n"
+            error_msg += f"{self._name} registry contains the following items:\n"
+            error_msg += f"{self}"
+            raise KeyError(error_msg)
         return self._registry[name]
 
     def __contains__(self, name):
