@@ -15,18 +15,18 @@ from logging import getLogger
 class ClassificationTrainer(BaseTrainer):
     def __init__(self, config):
         super(ClassificationTrainer, self).__init__(config)
-
+        self.config = config
         self.model = build_model(config)
-        self.criterion = build_loss(config)
+        self.criterion = build_loss(self.config)
         self.optimizer = torch.optim.Adam(
-            self.model.parameters(), lr=config.get('lr', 0.001))
+            self.model.parameters(), lr=self.config.get('lr', 0.001))
         self.train_dataloader = DataLoader(build_dataset(
-            config, 'train'), batch_size=config.get('batch_size', 16), shuffle=True)
+            self.config, 'train'), batch_size=self.config.get('batch_size', 16), shuffle=True)
         self.val_dataloader = DataLoader(build_dataset(
-            config, 'val'), batch_size=config.get('batch_size', 16), shuffle=False)
+            self.config, 'val'), batch_size=self.config.get('batch_size', 16), shuffle=False)
         self.device = get_device()
         self.best_val_accuracy = 0
-        self.metric = build_metric(config)
+        self.metric = build_metric(self.config)
 
     def train(self):
         logger = getLogger(__name__)
@@ -65,7 +65,7 @@ class ClassificationTrainer(BaseTrainer):
             if total_val_accuracy > self.best_val_accuracy:
                 self.best_val_accuracy = total_val_accuracy
                 torch.save(self.model.state_dict(), os.path.join(
-                    self.config.get('save_dir', ''), 'best_model.pth'))
+                    self.config.get('model_config').get('save_dir', ''), 'best_model.pth'))
                 logger.info(
                     f"Best validation accuracy updated to {self.best_val_accuracy} at epoch {epoch}")
             logger.info(f"Epoch {epoch} completed successfully.")
