@@ -91,12 +91,14 @@ class ClassificationTrainer(BaseTrainer):
                     f"Val Loss: {total_val_loss / len(self.val_dataloader)}")
                 logger.info(
                     f"Val Accuracy: {total_val_accuracy / len(self.val_dataloader)}")
-                if total_val_accuracy > self.best_val_accuracy:
-                    self.best_val_accuracy = total_val_accuracy
-                    torch.save(self.model.state_dict(), os.path.join(
-                        self.config.save_dir, 'best_model.pth'))
-                    logger.info(
-                        f"Best validation accuracy updated to {self.best_val_accuracy} at epoch {epoch}")
+                if len(self.val_dataloader) > 0:
+                    avg_val_accuracy = total_val_accuracy / len(self.val_dataloader)
+                    if avg_val_accuracy > self.best_val_accuracy:
+                        self.best_val_accuracy = avg_val_accuracy
+                        torch.save(self.model.state_dict(), os.path.join(
+                            self.config.save_dir, 'best_model.pth'))
+                        logger.info(
+                            f"Best validation accuracy updated to {self.best_val_accuracy} at epoch {epoch}")
             logger.info(f"Epoch {epoch} completed successfully.")
         logger.info(f"Training completed successfully.")
 
