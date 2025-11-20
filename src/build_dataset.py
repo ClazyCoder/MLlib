@@ -12,7 +12,7 @@ def build_image_dataset(data_path, output_path):
     if len(image_paths) == 0:
         raise ValueError(f"No images found in {data_path}")
     # TODO : find better way to get labels(NOW: using upper folder name as label)
-    labels = [image_path.split('/')[-2] for image_path in image_paths]
+    labels = [os.path.basename(os.path.dirname(image_path)) for image_path in image_paths]
     labels = list(map(int, labels))
     with open(output_path, 'w') as f:
         json.dump({'image_paths': image_paths, 'labels': labels}, f, indent=4)
@@ -24,7 +24,7 @@ def build_text_dataset(data_path, output_path):
     if len(text_paths) == 0:
         raise ValueError(f"No text files found in {data_path}")
     # TODO : find better way to get labels(NOW: using upper folder name as label)
-    labels = [text_path.split('/')[-2] for text_path in text_paths]
+    labels = [os.path.basename(os.path.dirname(text_path)) for text_path in text_paths]
     labels = list(map(int, labels))
     with open(output_path, 'w') as f:
         json.dump({'text_paths': text_paths, 'labels': labels}, f, indent=4)
