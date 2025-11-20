@@ -6,5 +6,5 @@ from src.datasets.config import DatasetConfig
 __all__ = ['build_dataset']
 
 
-def build_dataset(config: DatasetConfig, type: str):
-    return DATASET_REGISTRY.get(config.name)(config, type)
+def build_dataset(config: DatasetConfig, split: str):
+    return DATASET_REGISTRY.get(config.name)(config, split)
