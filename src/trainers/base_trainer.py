@@ -1,4 +1,4 @@
-from abc import *
+from abc import ABC, abstractmethod
 
 
 class BaseTrainer(ABC):
