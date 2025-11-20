@@ -13,7 +13,7 @@ elif [ "$MODE" = "test" ]; then
     echo "[INFO] Testing mode."
     uv run src/main.py --mode test --config $CONFIG_NAME
 else
-    echo "[ERROR] Invalid mode: $MODE"
+    echo "[ERROR] Invalid mode: \"$MODE\""
     exit 1
 fi
 
