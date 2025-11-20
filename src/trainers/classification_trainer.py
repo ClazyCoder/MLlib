@@ -42,6 +42,8 @@ class ClassificationTrainer(BaseTrainer):
             self.test_dataloader = self.val_dataloader
         self.device = get_device()
         self.best_val_accuracy = 0
+        if 'num_classes' not in config.metric_config:
+            config.metric_config['num_classes'] = model_config.num_classes
         metric_config = MetricConfig(**config.metric_config)
         self.metric = build_metric(metric_config)
 
