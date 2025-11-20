@@ -56,7 +56,7 @@ dataset_cfg:
   val_dataset_path: ./test/data/val.json
 ```
 
-src/build_dataset.py으로 학습에 필요한 .json파일 생성.
+src/build_dataset.py으로 학습에 필요한 .json 파일 생성.
 
 ### build_dataset
 
