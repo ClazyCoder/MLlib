@@ -19,8 +19,7 @@ class Registry:
         return obj
 
     def _register(self, name, obj):
-        assert (
-            name not in self._registry), f"{name} already registered in {self._name}"
+        assert name not in self._registry, f"{name} already registered in {self._name}"
         self._registry[name] = obj
 
     def get(self, name):
