@@ -21,9 +21,9 @@ class ClassificationTrainer(BaseTrainer):
         self.optimizer = torch.optim.Adam(
             self.model.parameters(), lr=config.get('lr', 0.001))
         self.train_dataloader = DataLoader(build_dataset(
-            config), batch_size=config.get('batch_size', 16), shuffle=True)
+            config, 'train'), batch_size=config.get('batch_size', 16), shuffle=True)
         self.val_dataloader = DataLoader(build_dataset(
-            config), batch_size=config.get('batch_size', 16), shuffle=False)
+            config, 'val'), batch_size=config.get('batch_size', 16), shuffle=False)
         self.device = get_device()
         self.best_val_accuracy = 0
         self.metric = build_metric(config)
