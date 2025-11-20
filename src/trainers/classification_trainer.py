@@ -54,24 +54,24 @@ class ClassificationTrainer(BaseTrainer):
             logger.info(
                 f"Train Accuracy: {total_train_accuracy / len(self.train_dataloader)}")
             self.model.eval()
-            logger.info(f"Epoch {epoch} completed successfully.")
-            for images, labels in self.val_dataloader:
-                images = move_to_device(images, self.device)
-                labels = move_to_device(labels, self.device)
-                outputs = self.model(images)
-                loss = self.criterion(outputs, labels)
-                total_val_loss += loss.item()
-                total_val_accuracy += self.metric.compute(outputs, labels)
-            logger.info(
-                f"Val Loss: {total_val_loss / len(self.val_dataloader)}")
-            logger.info(
-                f"Val Accuracy: {total_val_accuracy / len(self.val_dataloader)}")
-            if total_val_accuracy > self.best_val_accuracy:
-                self.best_val_accuracy = total_val_accuracy
-                torch.save(self.model.state_dict(), os.path.join(
-                    self.config.get('model_config').get('save_dir', ''), 'best_model.pth'))
+            with torch.no_grad():
+                for images, labels in self.val_dataloader:
+                    images = move_to_device(images, self.device)
+                    labels = move_to_device(labels, self.device)
+                    outputs = self.model(images)
+                    loss = self.criterion(outputs, labels)
+                    total_val_loss += loss.item()
+                    total_val_accuracy += self.metric.compute(outputs, labels)
                 logger.info(
-                    f"Best validation accuracy updated to {self.best_val_accuracy} at epoch {epoch}")
+                    f"Val Loss: {total_val_loss / len(self.val_dataloader)}")
+                logger.info(
+                    f"Val Accuracy: {total_val_accuracy / len(self.val_dataloader)}")
+                if total_val_accuracy > self.best_val_accuracy:
+                    self.best_val_accuracy = total_val_accuracy
+                    torch.save(self.model.state_dict(), os.path.join(
+                        self.config.get('model_config').get('save_dir', ''), 'best_model.pth'))
+                    logger.info(
+                        f"Best validation accuracy updated to {self.best_val_accuracy} at epoch {epoch}")
             logger.info(f"Epoch {epoch} completed successfully.")
         logger.info(f"Training completed successfully.")
 
