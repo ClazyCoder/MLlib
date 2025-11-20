@@ -91,7 +91,7 @@ class ClassificationTrainer(BaseTrainer):
                     f"Val Loss: {total_val_loss / len(self.val_dataloader)}")
                 logger.info(
                     f"Val Accuracy: {total_val_accuracy / len(self.val_dataloader)}")
-                if len(self.val_dataloader) > 0:
+                if len(self.val_dataloader.dataset) > 0:
                     avg_val_accuracy = total_val_accuracy / len(self.val_dataloader)
                     if avg_val_accuracy > self.best_val_accuracy:
                         self.best_val_accuracy = avg_val_accuracy
