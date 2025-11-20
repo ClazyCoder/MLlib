@@ -5,7 +5,7 @@ import os
 import logging
 
 LOG_FILE_NAME = "mllib_logs.log"
-LOG_DIR = "/app/logs/"
+LOG_DIR = os.environ.get("LOG_DIR", "./logs")
 if not os.path.exists(LOG_DIR):
     os.makedirs(LOG_DIR)
 LOG_FILE = os.path.join(LOG_DIR, LOG_FILE_NAME)

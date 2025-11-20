@@ -1,5 +1,5 @@
-from utils.registry import METRIC_REGISTRY
-from src.metrics.accuracy import *
+from src.utils.registry import METRIC_REGISTRY
+from src.metrics.accuracy import Accuracy
 
 __all__ = ['build_metric']
 

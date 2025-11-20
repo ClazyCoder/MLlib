@@ -1,5 +1,5 @@
 from src.utils.registry import LOSS_REGISTRY
-from src.losses.ce_loss import *
+from src.losses.ce_loss import CELoss
 
 __all__ = ['build_loss']
 
