@@ -29,10 +29,10 @@ class ClassificationDataset(Dataset):
         return len(self.image_paths)
 
     def __getitem__(self, idx):
-        image = Image.open(self.image_paths[idx])
-        if self.transform:
-            image = self.transform(image)
-        else:
-            image = torchvision.transforms.Resize((224, 224))(image)
-            image = torchvision.transforms.ToTensor()(image)
+        with Image.open(self.image_paths[idx]) as image:
+            if self.transform:
+                image = self.transform(image)
+            else:
+                image = torchvision.transforms.Resize((224, 224))(image)
+                image = torchvision.transforms.ToTensor()(image)
         return image, self.labels[idx]
