@@ -8,5 +8,4 @@ class RootConfig(BaseModel):
     trainer_config: Dict[str, Any]
     metric_config: Dict[str, Any]
     dataset_config: Dict[str, Any]
-    save_dir: str = "./results"
     model_config = ConfigDict(extra="forbid")

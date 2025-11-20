@@ -7,3 +7,4 @@ class TrainerConfig(BaseModel):
     batch_size: int = 16
     epochs: int = 10
     model_config = ConfigDict(extra="allow")
+    save_dir: str = "./results"
