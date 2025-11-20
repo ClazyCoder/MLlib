@@ -82,13 +82,14 @@ class ClassificationTrainer(BaseTrainer):
         total_test_loss = 0
         total_test_accuracy = 0
         self.model.eval()
-        for images, labels in self.test_dataloader:
-            images = move_to_device(images, self.device)
-            labels = move_to_device(labels, self.device)
-            outputs = self.model(images)
-            loss = self.criterion(outputs, labels)
-            total_test_loss += loss.item()
-            total_test_accuracy += self.metric.compute(outputs, labels)
+        with torch.no_grad():
+            for images, labels in self.test_dataloader:
+                images = move_to_device(images, self.device)
+                labels = move_to_device(labels, self.device)
+                outputs = self.model(images)
+                loss = self.criterion(outputs, labels)
+                total_test_loss += loss.item()
+                total_test_accuracy += self.metric.compute(outputs, labels)
         logger.info(
             f"Test Loss: {total_test_loss / len(self.test_dataloader)}")
         logger.info(
