@@ -22,7 +22,7 @@ def main():
     parser.add_argument("--config", type=str, default="configs/default.yaml")
     args = parser.parse_args()
     with open(args.config, 'r') as f:
-        config = yaml.load(f, Loader=yaml.FullLoader)
+        config = yaml.safe_load(f)
     config = RootConfig(**config)
     trainer = build_trainer(config)
     if args.mode == "train":
